@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+		<configuration-properties doc:name="Configuration properties" doc:id="bc69ee1d-d6a2-40e8-baaf-bde51550aa39" file="properties.properties" />
+	
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a5c7715e-da18-4250-aefd-0535e9a2d2a3" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="8c002445-41f6-41a2-9ece-4f0b71b5da38" >
+		<http:request-connection host="core.spreedly.com" >
+			<http:authentication >
+				<http:basic-authentication username="QXamfjS8T4d5bRKqR7ocloaNOvU" password="fpSG443zFbGHThNvcTjrxMjiPBv8jA3967tZ73abKJHCO1Y5VO8ubHJy4sGTdk4H" />
+			</http:authentication>
+		</http:request-connection>
+	</http:request-config>
+	<flow name="POST_COMPRAS" doc:id="f51a6862-c7e2-47c9-8477-87ac9da80ee3">
+		<set-variable value="payload" doc:name="Set Variable" doc:id="4ebbc0d5-b82d-4f7a-ac75-3440a086d69e" variableName="PostCompras"/>
+		<http:request method="POST" doc:name="COMPRAS" doc:id="21997e3a-a269-4405-9c24-a52e596146c8" config-ref="HTTP_Request_configuration" path="/v1/gateways/692bGGx77NHdwJv1llg2BbPSpgh/purchase.json">
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "application/json"
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="6d8c7f12-d8de-47fd-ae60-bf759118e9e9" message="&quot;HAZ LLAMADO UNA COMPRA MANUAL EXITOSAMENTE DE TIPO 'POST', DESDE POSTMAN&quot;" />
+	</flow>
+	<flow name="POST_METODO_DE_PAGO" doc:id="d1762e31-911f-4293-852b-710b1e725167">
+		<set-variable value="payload" doc:name="Set Variable" doc:id="48f030db-cd00-4797-ae19-201c7c1c01a2" variableName="MetodoPago" />
+		<http:request method="POST" doc:name="Llamada al API POST" doc:id="fe4fee35-aa77-4b23-be2f-e3762b6a0e72" config-ref="HTTP_Request_configuration" path="/v1/payment_methods.json">
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "application/json"
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="e9f11f57-e35b-4402-b350-8299c375aee3" message='** HAS INVOCADO A UN METODO DE PAGO TIPO "POST", DESDE POSTMAN **' />
+	</flow>
+	<flow name="GET_TRANSACCION_FALLIDAS" doc:id="b654eb90-68df-4d67-aa1e-87d28e554e0e">
+		<http:request method="GET" doc:name="Request" doc:id="3f736f5e-823b-4270-bfca-36d257f25923" config-ref="HTTP_Request_configuration" path="/v1/gateways/YhptdZmhs5n3d1giE4WcQ8LsBKx/transactions.json">
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "application/json"
+}]]]></http:headers>
+			<http:query-params><![CDATA[#[output application/java
+---
+{
+	"order" : "desc"
+}]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="7367a216-eb68-4d82-bc83-381b8403200a" message="&quot;HAZ LLAMADO UNA TRANSACCION EXITOSAMENTE DE TIPO 'POST', DESDE POSTMAN&quot;" />
+	</flow>
+	<flow name="METODO_PAGO_VARIAS_VECES" doc:id="fb495c87-8b4c-4d61-9346-eafd83e155db" >
+		<set-variable value="payload" doc:name="Set Variable" doc:id="1c25c049-ebca-4942-af4a-ddb90c758bd2" variableName="INFO3"/>
+		<http:request method="POST" doc:name="TRANSACCION" doc:id="337fd9ee-d64c-45c8-93d2-0bf62d118d17" config-ref="HTTP_Request_configuration" path="/v1/transactions/{token_transaction}/purchase.json">
+			<http:body ><![CDATA[#[{   
+  "transaction": {
+    "amount": payload.transaction.amount
+  }
+}]]]></http:body>
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "application/json"
+}]]]></http:headers>
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"token_transaction" : payload.transaction.transaction_token
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="558f8c51-c927-4333-beff-0ab5ea490447" message='"VERIFICADOR DE COMPRA"'/>
+	</flow>
+	<flow name="FLUJO" doc:id="2f6adcd9-b735-4a0e-8f4b-014ceca5b407">
+		<set-variable value="payload" doc:name="Set Variable" doc:id="8b0e8be2-af16-4714-9854-73e718f5c26d" variableName="INFO1" />
+		<http:request method="POST" doc:name="LLAMADA PAYMETHOD" doc:id="bc0c6f64-02c6-4e4f-901a-57ce3bb85b81" config-ref="HTTP_Request_configuration" path="/v1/payment_methods.json">
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "application/json"
+}]]]></http:headers>
+		</http:request>
+		<set-variable value="payload.transaction.payment_method.token" doc:name="Set Variable" doc:id="ebb18812-bc9a-494b-bbf1-7e352f0208ef" variableName="DatosToken" />
+		<http:request method="POST" doc:name="TRANSACCION" doc:id="5b61485d-806f-43af-bb91-e95d3a0487f1" config-ref="HTTP_Request_configuration" path="/v1/gateways/JuP3S8qy0c7ddteLNlvOIx67N7F/purchase.json">
+			<http:body><![CDATA[#[{
+  "transaction": {
+    "payment_method_token": payload.transaction.payment_method.token,
+    "amount": 100,
+    "currency_code": "USD"
+  }
+}]]]></http:body>
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	"Content-Type" : "application/json"
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="5bdf8087-37a4-4bd5-a215-9a2971298836" message="&quot;HAZ LLAMADO UNA COMPRA INDEFINIDA EXITOSAMENTE DE TIPO 'POST', DESDE POSTMAN&quot;"/>
+	</flow>
+</mule>
