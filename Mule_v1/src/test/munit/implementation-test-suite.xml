@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="implementation-test-suite.xml" />
+	<munit:test name="implementation-test-suite-POST_METODO_DE_PAGOTest" doc:id="a01f61f3-98e6-4df6-a4d4-8d5309ebcad7" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="540b0dac-4699-4a86-a0cb-997768131b42" >
+				<munit:payload value='{
+      "first_name": "Jon",
+      "last_name": "Doe",
+      "bank_routing_number": "021000021",
+      "bank_account_number": "9876543210",
+      "bank_account_type": "checking",
+      "bank_account_holder_type": "personal"
+}' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to POST_METODO_DE_PAGO" doc:id="9178b6e6-e335-4141-babe-1a259ef8f4bb" name="POST_METODO_DE_PAGO"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="86bf3846-81a4-45c2-92f5-8bb5574f45f7" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="implementation-test-suite-POST_COMPRASTest" doc:id="b0964a1c-58e6-4679-8e41-1c6e760081fa" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="92697b03-6c62-4b89-a557-7779e75d4f20" >
+				<munit:payload value='{
+    "payment_method_token": "H7uAXHXuzZobdiDjgFT8kMbPOgE",
+    "amount": 100,
+    "currency_code": "USD"
+}' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to POST_COMPRAS" doc:id="dbae6635-4fa2-4cb4-87a8-960e8192fbb1" name="POST_COMPRAS"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="4ed45bef-646e-4dd3-b498-88cd2929b767" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="implementation-test-suite-POST_TRANSACCIONTest" doc:id="fa5f3b37-ad2e-4b3f-a556-600931935794" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="1bd33055-86e1-48cc-8b51-6dbb6b688f31" >
+				<munit:payload value='{
+    "transaction_token": "TSBDzgKxDTOZ7bI0qBLd4CDNFk",
+    "amount": 128999
+}' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to POST_TRANSACCION" doc:id="04a174c1-c594-474c-abfc-fe4e5e2cde4d" name="POST_TRANSACCION"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="30c5cd6c-6736-402f-8244-c1852fc93968" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
