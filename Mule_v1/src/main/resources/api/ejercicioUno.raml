@@ -1,0 +1,78 @@
+#%RAML 1.0
+title: Pruebas con Spreedly
+mediaType: 
+  - application/json
+version: 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/cec62a11-0438-43c3-afb6-ee5e5cf786aa/ # baseUri: core.spreedly.com/v1
+ 
+ 
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    displayName: Basic Authentication
+    description: Se necesita el usuario y la contraseña para acceder a la petición
+protocols:
+  [HTTP, HTTPS]
+description: Recupere una lista ordenada y paginada de todos los métodos de pago retenidos en el entorno autenticado.
+ 
+documentation:
+  - title: API getway
+    content: obtenemos una lista de gateways https://docs.spreedly.com/reference/api/v1/#list
+ 
+       
+/MetodoPago:
+
+         
+  post:
+    securedBy:
+      - basic
+    body: 
+      application/json:
+        properties:
+          input:
+            example: !include Archivos/PayMethod.json
+          
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: !include Archivos/PayMethod.raml
+            example: !include Archivos/PayMethodOutput.json
+
+
+/Compra:
+  post:
+    securedBy:
+      - basic
+    body:
+      application/json:
+        properties:
+          input:
+            example: !include Archivos/Compra.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include Archivos/Compra.raml
+            example: !include Archivos/CompraSalida.json
+
+
+/Transacciones:
+  post:
+    securedBy:
+      - basic
+    body:
+      application/json:
+        properties:
+          input:
+            example: !include Archivos/Transaccion.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include Archivos/Transaccion.raml
+            example: !include Archivos/TransaccionSalida.json
+              
+      
