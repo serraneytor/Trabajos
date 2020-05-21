@@ -5,7 +5,6 @@ mediaType:
 version: 1.0
 baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/cec62a11-0438-43c3-afb6-ee5e5cf786aa/ # baseUri: core.spreedly.com/v1
  
- 
 securitySchemes:
   basic:
     type: Basic Authentication
@@ -16,49 +15,55 @@ protocols:
 description: Recupere una lista ordenada y paginada de todos los métodos de pago retenidos en el entorno autenticado.
  
 documentation:
-  - title: API getway
+  - title: API SPREEDLY
     content: obtenemos una lista de gateways https://docs.spreedly.com/reference/api/v1/#list
+
  
        
 /MetodoPago:
 
-         
   post:
+    description: Se obtiene el token del metodo pago
+
     securedBy:
       - basic
     body: 
       application/json:
         properties:
           input:
+            type: !include Archivos/PayMethod.raml
             example: !include Archivos/PayMethod.json
           
     responses: 
       200:
         body: 
           application/json:
-            type: !include Archivos/PayMethod.raml
+            type: !include Archivos/PayMethodOutput.raml
             example: !include Archivos/PayMethodOutput.json
 
 
 /Compra:
   post:
+    description: Se obtiene el token compra, gracias al token de "metodo pago"
     securedBy:
       - basic
     body:
       application/json:
         properties:
           input:
+            type:  !include  Archivos/Compra.raml
             example: !include Archivos/Compra.json
     
     responses:
       200:
         body:
           application/json:
-            type: !include Archivos/Compra.raml
+            type: !include Archivos/CompraSalida.raml
             example: !include Archivos/CompraSalida.json
 
 
-/Transacciones:
+/Transaccion:
+  description: Con el token de  "compra" podemos ver la transaccion la veces que sea
   post:
     securedBy:
       - basic
@@ -66,6 +71,8 @@ documentation:
       application/json:
         properties:
           input:
+            description: 
+            type: !include Archivos/Transaccion.raml
             example: !include Archivos/Transaccion.json
     
     responses:

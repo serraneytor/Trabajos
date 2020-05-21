@@ -1,0 +1,32 @@
+#%RAML 1.0 DataType
+ 
+type: object
+description: Response compra
+properties: 
+ 
+  created:
+    type: date-only
+  updated:
+    type: date-only
+  succeeded:
+    type: boolean     
+  token:
+    type: string    
+  amount:
+    type: number
+  token_method:
+    type: string 
+  created_method:
+    type: date-only
+  updated_method:
+    type: date-only 
+  first_name_method:
+    type: string  
+  last_name_method:
+    type: string 
+  routing_number_method:
+    type: string       
+  account_number_method:
+    type: string    
+ 
+example: !include CompraSalida.json   

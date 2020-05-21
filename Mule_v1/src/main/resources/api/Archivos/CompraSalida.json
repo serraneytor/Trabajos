@@ -1,100 +1,20 @@
 {
-    "transaction": {
-        "on_test_gateway": true,
-        "created_at": "2020-05-19T15:08:03Z",
-        "updated_at": "2020-05-19T15:08:03Z",
+
+        "created": "2020-05-19",
+        "updated": "2020-05-19",
         "succeeded": true,
-        "state": "succeeded",
         "token": "NPrJ3KNKMfjkXuRBpeHzcEjfy3I",
-        "transaction_type": "Purchase",
-        "order_id": null,
-        "ip": null,
-        "description": null,
-        "email": null,
-        "merchant_name_descriptor": null,
-        "merchant_location_descriptor": null,
-        "gateway_specific_fields": null,
-        "gateway_specific_response_fields": {},
-        "gateway_transaction_id": "57",
-        "gateway_latency_ms": 20,
-        "stored_credential_initiator": null,
-        "stored_credential_reason_type": null,
-        "warning": null,
         "amount": 100,
         "currency_code": "USD",
-        "retain_on_success": false,
-        "payment_method_added": false,
-        "dynamically_routed": false,
-        "routing": null,
-        "message_key": "messages.transaction_succeeded",
-        "message": "Succeeded!",
-        "gateway_token": "692bGGx77NHdwJv1llg2BbPSpgh",
-        "gateway_type": "test",
-        "response": {
-            "success": true,
-            "message": "Successful purchase",
-            "avs_code": null,
-            "avs_message": null,
-            "cvv_code": null,
-            "cvv_message": null,
-            "pending": false,
-            "result_unknown": false,
-            "error_code": null,
-            "error_detail": null,
-            "cancelled": false,
-            "fraud_review": null,
-            "created_at": "2020-05-19T15:08:03Z",
-            "updated_at": "2020-05-19T15:08:03Z"
-        },
-        "shipping_address": {
-            "name": null,
-            "address1": null,
-            "address2": null,
-            "city": null,
-            "state": null,
-            "zip": null,
-            "country": null,
-            "phone_number": null
-        },
-        "api_urls": [
-            {
-                "referencing_transaction": []
-            },
-            {
-                "failover_transaction": []
-            }
-        ],
-        "attempt_3dsecure": false,
-        "payment_method": {
-            "token": "B4N5pfKeKp3kwgrhTuAU9432Vdx",
-            "created_at": "2020-05-19T15:07:38Z",
-            "updated_at": "2020-05-19T15:07:38Z",
-            "email": null,
-            "data": null,
-            "storage_state": "cached",
-            "test": true,
-            "metadata": null,
-            "callback_url": null,
-            "full_name": "Jhon Salchicon",
-            "bank_name": null,
-            "account_type": "checking",
-            "account_holder_type": "personal",
-            "routing_number_display_digits": "021",
-            "account_number_display_digits": "3210",
-            "first_name": "Jhon",
-            "last_name": "Salchicon",
-            "address1": null,
-            "address2": null,
-            "city": null,
-            "state": null,
-            "zip": null,
-            "country": null,
-            "phone_number": null,
-            "company": null,
-            "payment_method_type": "bank_account",
-            "errors": [],
-            "routing_number": "021*",
-            "account_number": "*3210"
-        }
-    }
+             
+            "token_method": "B4N5pfKeKp3kwgrhTuAU9432Vdx",
+            "created_method": "2020-05-19",
+            "updated_method": "2020-05-19",
+            "first_name_method": "Jhon",
+            "last_name_method": "Salchicon",
+            "account_number_method": "*3210",
+            "routing_number_method": "021*"
+            
+        
+    
 }
