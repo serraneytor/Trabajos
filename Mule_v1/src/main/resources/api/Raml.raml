@@ -1,0 +1,174 @@
+#%RAML 1.0
+title: Pruebas con Spreedly
+mediaType: 
+  - application/json
+version: v1
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/b3c363d3-97f7-4173-aed1-0c4cc4df901b/ # baseUri: core.spreedly.com/{version}
+
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    displayName: Basic Authentication
+    description: Se necesita el usuario y la contraseña para acceder a la petición
+
+    
+    describedBy:
+      headers:
+        Authorization:
+          description: Se requiere para acceder al servicio
+          type: string
+
+      responses:
+        401:
+          description: |
+             Token mal o caducado. Esto puede suceder si el usuario o Dropbox revocó o expiró un token de acceso. Para solucionarlo, vuelva a autenticarse
+              el usuario..
+        403:
+          description: |
+              Solicitud incorrecta (clave de consumidor incorrecta, falta de validez incorrecta, caducada
+              marca de tiempo ...). Desafortunadamente, volver a autenticar al usuario no ayudará aquí.
+
+protocols:
+  [HTTP, HTTPS]
+
+
+description: Recupere una lista ordenada y paginada de todos los métodos de pago retenidos en el entorno autenticado.
+ 
+documentation:
+  - title: API SPREEDLY
+    content: obtenemos una lista de gateways https://docs.spreedly.com/reference/api/v1/#list
+
+
+
+       
+/{MetodoPago}{ext}:
+ uriParameters:
+
+   MetodoPago:
+     
+     default: payment_methods
+     description: Path correcto de la URL
+
+   ext:
+     default: .json
+     
+     #enum: [ .json ]
+     description: Use .json to specify application/json or .xml to specify text/xml
+
+ post:
+    description: Se obtiene el token del metodo pago
+
+    securedBy:
+      - basic
+    body: 
+      application/json:
+         
+            type: !include Archivos/PayMethod.raml
+            example: !include Archivos/PayMethod.json
+
+          
+    responses: 
+      201:
+        body: 
+          application/json:
+            type: !include Archivos/PayMethodOutput.raml
+            example: !include Archivos/PayMethodOutput.json
+      400:
+        body:
+         application/json:
+           
+           example: { "code" : 1, "message" : "Bad Request" }
+      
+
+      
+      500:
+        body:
+          application/json:
+            example:
+              Error Interno del servidor
+
+/{Compra}/{tokenGateway}/{ext}:
+   uriParameters:
+    Compra:
+       default: gateways
+       description: Path correcto de la URL 
+
+    tokenGateway:
+       default: 2wOYe6OvP3TzORVRbEqMpazMGrL
+       description: Token requerido 
+
+    ext:
+      enum: [ purchase.json, purchase.xml ]
+      description: usa una extencion .json 
+
+   post:
+    description: Se obtiene el token compra, gracias al token de "metodo pago"
+    securedBy:
+      - basic
+    body:
+      application/json:
+
+            type:  !include  Archivos/Compra.raml
+            example: !include Archivos/Compra.json
+    
+    responses:
+      201:
+        body:
+          application/json:
+            type: !include Archivos/CompraSalida.raml
+            example: !include Archivos/CompraSalida.json
+
+      400:
+        body:
+          application/json:
+            example:
+              Se requieren las crdenciales para la petición
+      
+      500:
+        body:
+          application/json:
+            example:
+              Error Interno del servidor
+
+
+/{Transaccion}/{transaction_token}/{ext}:
+  uriParameters:
+    Transaccion:
+       enum: [gateways]
+       description: Path correcto de la URL    
+    transaction_token:
+       enum: [NPrJ3KNKMfjkXuRBpeHzcEjfy3I] 
+       description: Token requerido 
+    ext:
+      enum: [ purchase.json, purchase.xml ]
+      description: usa una extencion .json 
+
+  description: Con el token de  "compra" podemos ver la transaccion la veces que sea
+  post:
+    securedBy:
+      - basic
+    body:
+      application/json:
+            type: !include Archivos/Transaccion.raml
+            example: !include Archivos/Transaccion.json
+    
+    responses:
+      201:
+        body:
+          application/json:
+            type: !include Archivos/TransaccionSalida.raml
+            example: !include Archivos/TransaccionSalida.json
+      
+      400:
+        body:
+          application/json:
+            example:
+              Se requieren las crdenciales para la petición
+      
+      500:
+        body:
+          application/json:
+            example:
+              Error Interno del servidor
+              
+      

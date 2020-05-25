@@ -3,28 +3,41 @@
 type: object
 description: Response Metodo Pago
 properties: 
- 
-  state:
-     type: string
-  token:
-     type: string 
-  created:
-    type: date-only
-  updated:
-    type: date-only
-  succeeded:
-    type: boolean    
-  token_method:
-    type: string
-  created_method:
-    type: date-only
-  updated_method:
-    type: date-only 
-  full_name_method:
-    type: string  
-  routing_number:
-    type: string  
-  account_number:
-    type: string   
+ transaction:
+    properties:
+      token:
+       type: string 
+      created:
+       type: date-only
+      updated:
+       type: date-only
+      succeeded:
+       type: boolean  
+      state:
+       type: string 
+
+      payment_method:
+       type: object
+       properties:    
+        token_method:
+         type: string
+
+        created_method:
+         type: date-only
+
+        updated_method:
+           type: date-only 
+
+        full_name_method:
+         type: string  
+
+        routing_number:
+           type: string  
+
+        account_number:
+         type: string   
+
+
+
  
 example: !include PayMethodOutput.json

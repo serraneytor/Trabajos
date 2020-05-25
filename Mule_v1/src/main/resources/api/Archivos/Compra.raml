@@ -2,12 +2,15 @@
 
 type: object
 properties: 
- payment_method_token:
-   type: string
- amount:
-  type: number
+
+ transaction:
+  properties:
+     payment_method:
+       type: string
+     amount:
+      type: number
   
- currency_code:
-   type: string
+     currency_code:
+      type: string
 
 example: !include Compra.json

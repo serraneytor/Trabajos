@@ -3,10 +3,15 @@
 type: object
 properties: 
 
- amount:
-   type: number
-  
- currency_code:
-  type: string
+ transaction:
+   properties:   
+    payment_method:
+     type: string
+
+    amount:
+     type: number
+
+    currency_code:
+     type: string
 
 example: !include Transaccion.json

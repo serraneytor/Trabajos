@@ -1,6 +1,7 @@
 {
-  
+  "transaction": {
+  "payment_method": "TRqK1ssvPreqtYN26d6KQsQgdeM",
     "amount": 100,
     "currency_code": "USD"
-  
+  }
 }

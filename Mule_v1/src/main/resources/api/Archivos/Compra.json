@@ -1,7 +1,7 @@
 {
-
-    "payment_method_token": "B4N5pfKeKp3kwgrhTuAU9432Vdx",
+  "transaction": {
+    "payment_method": "2wOYe6OvP3TzORVRbEqMpazMGrL",
     "amount": 100,
     "currency_code": "USD"
-  
+  }
 }
