@@ -1,0 +1,20 @@
+{
+        "transaction": {
+        "created": "2020-05-19",
+        "updated": "2020-05-19",
+        "succeeded": true,
+        "token": "NPrJ3KNKMfjkXuRBpeHzcEjfy3I",
+        "amount": 100,
+        "currency_code": "USD",
+              "payment_method": {
+            "token_method": "B4N5pfKeKp3kwgrhTuAU9432Vdx",
+            "created_method": "2020-05-19",
+            "updated_method": "2020-05-19",
+            "first_name_method": "Jhon",
+            "last_name_method": "Salchicon",
+            "account_number_method": "*3210",
+            "routing_number_method": "021*"
+            }
+        
+    }
+}

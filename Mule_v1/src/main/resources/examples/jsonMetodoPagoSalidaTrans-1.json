@@ -1,0 +1,18 @@
+{
+    "transaction": {
+        "token": "423n5H8eFaWsuDFBljFXkJv5AvQ",
+        "created": "2020-05-21",
+        "updated": "2020-05-21",
+        "succeeded": true,
+        "state": "succeeded",
+
+        "payment_method": {
+            "token": "2wOYe6OvP3TzORVRbEqMpazMGrL",
+            "created": "2020-05-21",
+            "updated": "2020-05-21",
+            "full_name": "Jhon Salchicon",
+            "routing_number": "021*",
+            "account_number": "*3210"
+        }
+    }
+}

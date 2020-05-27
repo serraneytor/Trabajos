@@ -1,0 +1,12 @@
+{
+       "transaction": {
+        "message": "Succeeded!",
+        "created": "2020-05-19",
+        "updated": "2020-05-19",
+        "token": "Kbi4Oit5lez58GlYv8r7pAD8bMA",
+        "amount": 100,
+        
+        "gateway_token": "692bGGx77NHdwJv1llg2BbPSpgh",
+        "reference_token": "NPrJ3KNKMfjkXuRBpeHzcEjfy3I"
+   }
+}

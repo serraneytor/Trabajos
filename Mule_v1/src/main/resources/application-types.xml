@@ -79,6 +79,286 @@ type TransaccionMessage = {|
 
 ]]></types:shape>
     </types:type>
+    <types:type name="PaymethodSalida" format="json">
+      <types:shape format="weave" example="examples/jsonMetodoPagoSalida-1.json"><![CDATA[%dw 2.0
+
+type PaymethodSalida = {|
+  transaction: {|
+    token: String, 
+    created_at: String, 
+    updated_at: String, 
+    succeeded: Boolean, 
+    transaction_type: String, 
+    retained: Boolean, 
+    state: String, 
+    message_key: String, 
+    message: String, 
+    payment_method: {|
+      token: String, 
+      created_at: String, 
+      updated_at: String, 
+      email: Null, 
+      data: Null, 
+      storage_state: String, 
+      test: Boolean, 
+      metadata: Null, 
+      callback_url: Null, 
+      full_name: String, 
+      bank_name: Null, 
+      account_type: String, 
+      account_holder_type: String, 
+      routing_number_display_digits: String, 
+      account_number_display_digits: String, 
+      first_name: String, 
+      last_name: String, 
+      address1: Null, 
+      address2: Null, 
+      city: Null, 
+      state: Null, 
+      zip: Null, 
+      country: Null, 
+      phone_number: Null, 
+      company: Null, 
+      payment_method_type: String, 
+      errors: Array<Any>, 
+      routing_number: String, 
+      account_number: String
+    |}
+  |}
+|} {"example": "{\\\"transaction\\\":{\\\"token\\\":\\\"Fs8qLb6aEbEtL9LY9SG5nZJTW2M\\\",\\\"created_at\\\":\\\"2020-05-27T15:32:35Z\\\",\\\"updated_at\\\":\\\"2020-05-27T15:32:35Z\\\",\\\"succeeded\\\":true,\\\"transaction_type\\\":\\\"AddPaymentMethod\\\",\\\"retained\\\":false,\\\"state\\\":\\\"succeeded\\\",\\\"message_key\\\":\\\"messages.transaction_succeeded\\\",\\\"message\\\":\\\"Succeeded!\\\",\\\"payment_method\\\":{\\\"token\\\":\\\"NdG23semQSK2rqVn5Cg5iDTmHjZ\\\",\\\"created_at\\\":\\\"2020-05-27T15:32:35Z\\\",\\\"updated_at\\\":\\\"2020-05-27T15:32:35Z\\\",\\\"email\\\":null,\\\"data\\\":null,\\\"storage_state\\\":\\\"cached\\\",\\\"test\\\":true,\\\"metadata\\\":null,\\\"callback_url\\\":null,\\\"full_name\\\":\\\"Jhon Salchicon\\\",\\\"bank_name\\\":null,\\\"account_type\\\":\\\"checking\\\",\\\"account_holder_type\\\":\\\"personal\\\",\\\"routing_number_display_digits\\\":\\\"021\\\",\\\"account_number_display_digits\\\":\\\"3210\\\",\\\"first_name\\\":\\\"Jhon\\\",\\\"last_name\\\":\\\"Salchicon\\\",\\\"address1\\\":null,\\\"address2\\\":null,\\\"city\\\":null,\\\"state\\\":null,\\\"zip\\\":null,\\\"country\\\":null,\\\"phone_number\\\":null,\\\"company\\\":null,\\\"payment_method_type\\\":\\\"bank_account\\\",\\\"errors\\\":[],\\\"routing_number\\\":\\\"021*\\\",\\\"account_number\\\":\\\"*3210\\\"}}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="PatmethodSalidaMessage" format="json">
+      <types:shape format="weave" example="examples/jsonMetodoPagoSalidaTrans-1.json"><![CDATA[%dw 2.0
+
+type PatmethodSalidaMessage = {|
+  transaction: {|
+    token: String, 
+    created: String, 
+    updated: String, 
+    succeeded: Boolean, 
+    state: String, 
+    payment_method: {|
+      token: String, 
+      created: String, 
+      updated: String, 
+      full_name: String, 
+      routing_number: String, 
+      account_number: String
+    |}
+  |}
+|} {"example": "{\\\"transaction\\\":{\\\"token\\\":\\\"423n5H8eFaWsuDFBljFXkJv5AvQ\\\",\\\"created\\\":\\\"2020-05-21\\\",\\\"updated\\\":\\\"2020-05-21\\\",\\\"succeeded\\\":true,\\\"state\\\":\\\"succeeded\\\",\\\"payment_method\\\":{\\\"token\\\":\\\"2wOYe6OvP3TzORVRbEqMpazMGrL\\\",\\\"created\\\":\\\"2020-05-21\\\",\\\"updated\\\":\\\"2020-05-21\\\",\\\"full_name\\\":\\\"Jhon Salchicon\\\",\\\"routing_number\\\":\\\"021*\\\",\\\"account_number\\\":\\\"*3210\\\"}}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="CompraSalida" format="json">
+      <types:shape format="weave" example="examples/jsonCompraSalida.json"><![CDATA[%dw 2.0
+
+type CompraSalida = {|
+  transaction: {|
+    on_test_gateway: Boolean, 
+    created_at: String, 
+    updated_at: String, 
+    succeeded: Boolean, 
+    state: String, 
+    token: String, 
+    transaction_type: String, 
+    order_id: Null, 
+    ip: Null, 
+    description: Null, 
+    email: Null, 
+    merchant_name_descriptor: Null, 
+    merchant_location_descriptor: Null, 
+    gateway_specific_fields: Null, 
+    gateway_specific_response_fields: {|  |}, 
+    gateway_transaction_id: String, 
+    gateway_latency_ms: Number {"typeId": "int"}, 
+    stored_credential_initiator: Null, 
+    stored_credential_reason_type: Null, 
+    warning: Null, 
+    amount: Number {"typeId": "int"}, 
+    currency_code: String, 
+    retain_on_success: Boolean, 
+    payment_method_added: Boolean, 
+    dynamically_routed: Boolean, 
+    routing: Null, 
+    message_key: String, 
+    message: String, 
+    gateway_token: String, 
+    gateway_type: String, 
+    response: {|
+      success: Boolean, 
+      message: String, 
+      avs_code: Null, 
+      avs_message: Null, 
+      cvv_code: Null, 
+      cvv_message: Null, 
+      pending: Boolean, 
+      result_unknown: Boolean, 
+      error_code: Null, 
+      error_detail: Null, 
+      cancelled: Boolean, 
+      fraud_review: Null, 
+      created_at: String, 
+      updated_at: String
+    |}, 
+    shipping_address: {|
+      name: Null, 
+      address1: Null, 
+      address2: Null, 
+      city: Null, 
+      state: Null, 
+      zip: Null, 
+      country: Null, 
+      phone_number: Null
+    |}, 
+    api_urls: Array<{|      referencing_transaction: Array<Any>, 
+      failover_transaction: Array<Any>
+    |}>, 
+    attempt_3dsecure: Boolean, 
+    payment_method: {|
+      token: String, 
+      created_at: String, 
+      updated_at: String, 
+      email: Null, 
+      data: Null, 
+      storage_state: String, 
+      test: Boolean, 
+      metadata: Null, 
+      callback_url: Null, 
+      full_name: String, 
+      bank_name: Null, 
+      account_type: String, 
+      account_holder_type: String, 
+      routing_number_display_digits: String, 
+      account_number_display_digits: String, 
+      first_name: String, 
+      last_name: String, 
+      address1: Null, 
+      address2: Null, 
+      city: Null, 
+      state: Null, 
+      zip: Null, 
+      country: Null, 
+      phone_number: Null, 
+      company: Null, 
+      payment_method_type: String, 
+      errors: Array<Any>, 
+      routing_number: String, 
+      account_number: String
+    |}
+  |}
+|} {"example": "{\\\"transaction\\\":{\\\"on_test_gateway\\\":true,\\\"created_at\\\":\\\"2020-05-27T15:56:43Z\\\",\\\"updated_at\\\":\\\"2020-05-27T15:56:44Z\\\",\\\"succeeded\\\":true,\\\"state\\\":\\\"succeeded\\\",\\\"token\\\":\\\"KyC99PaKPQYV1IAnlcyown2OXgR\\\",\\\"transaction_type\\\":\\\"Purchase\\\",\\\"order_id\\\":null,\\\"ip\\\":null,\\\"description\\\":null,\\\"email\\\":null,\\\"merchant_name_descriptor\\\":null,\\\"merchant_location_descriptor\\\":null,\\\"gateway_specific_fields\\\":null,\\\"gateway_specific_response_fields\\\":{},\\\"gateway_transaction_id\\\":\\\"57\\\",\\\"gateway_latency_ms\\\":36,\\\"stored_credential_initiator\\\":null,\\\"stored_credential_reason_type\\\":null,\\\"warning\\\":null,\\\"amount\\\":100,\\\"currency_code\\\":\\\"USD\\\",\\\"retain_on_success\\\":false,\\\"payment_method_added\\\":false,\\\"dynamically_routed\\\":false,\\\"routing\\\":null,\\\"message_key\\\":\\\"messages.transaction_succeeded\\\",\\\"message\\\":\\\"Succeeded!\\\",\\\"gateway_token\\\":\\\"692bGGx77NHdwJv1llg2BbPSpgh\\\",\\\"gateway_type\\\":\\\"test\\\",\\\"response\\\":{\\\"success\\\":true,\\\"message\\\":\\\"Successful purchase\\\",\\\"avs_code\\\":null,\\\"avs_message\\\":null,\\\"cvv_code\\\":null,\\\"cvv_message\\\":null,\\\"pending\\\":false,\\\"result_unknown\\\":false,\\\"error_code\\\":null,\\\"error_detail\\\":null,\\\"cancelled\\\":false,\\\"fraud_review\\\":null,\\\"created_at\\\":\\\"2020-05-27T15:56:44Z\\\",\\\"updated_at\\\":\\\"2020-05-27T15:56:44Z\\\"},\\\"shipping_address\\\":{\\\"name\\\":null,\\\"address1\\\":null,\\\"address2\\\":null,\\\"city\\\":null,\\\"state\\\":null,\\\"zip\\\":null,\\\"country\\\":null,\\\"phone_number\\\":null},\\\"api_urls\\\":[{\\\"referencing_transaction\\\":[]},{\\\"failover_transaction\\\":[]}],\\\"attempt_3dsecure\\\":false,\\\"payment_method\\\":{\\\"token\\\":\\\"NdG23semQSK2rqVn5Cg5iDTmHjZ\\\",\\\"created_at\\\":\\\"2020-05-27T15:32:35Z\\\",\\\"updated_at\\\":\\\"2020-05-27T15:32:35Z\\\",\\\"email\\\":null,\\\"data\\\":null,\\\"storage_state\\\":\\\"cached\\\",\\\"test\\\":true,\\\"metadata\\\":null,\\\"callback_url\\\":null,\\\"full_name\\\":\\\"Jhon Salchicon\\\",\\\"bank_name\\\":null,\\\"account_type\\\":\\\"checking\\\",\\\"account_holder_type\\\":\\\"personal\\\",\\\"routing_number_display_digits\\\":\\\"021\\\",\\\"account_number_display_digits\\\":\\\"3210\\\",\\\"first_name\\\":\\\"Jhon\\\",\\\"last_name\\\":\\\"Salchicon\\\",\\\"address1\\\":null,\\\"address2\\\":null,\\\"city\\\":null,\\\"state\\\":null,\\\"zip\\\":null,\\\"country\\\":null,\\\"phone_number\\\":null,\\\"company\\\":null,\\\"payment_method_type\\\":\\\"bank_account\\\",\\\"errors\\\":[],\\\"routing_number\\\":\\\"021*\\\",\\\"account_number\\\":\\\"*3210\\\"}}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="CompraSalidaMessage" format="json">
+      <types:shape format="weave" example="examples/jsonCompraSalidaTrans.json"><![CDATA[%dw 2.0
+
+type CompraSalidaMessage = {|
+  transaction: {|
+    created: String, 
+    updated: String, 
+    succeeded: Boolean, 
+    token: String, 
+    amount: Number {"typeId": "int"}, 
+    currency_code: String, 
+    payment_method: {|
+      token_method: String, 
+      created_method: String, 
+      updated_method: String, 
+      first_name_method: String, 
+      last_name_method: String, 
+      account_number_method: String, 
+      routing_number_method: String
+    |}
+  |}
+|} {"example": "{\\\"transaction\\\":{\\\"created\\\":\\\"2020-05-19\\\",\\\"updated\\\":\\\"2020-05-19\\\",\\\"succeeded\\\":true,\\\"token\\\":\\\"NPrJ3KNKMfjkXuRBpeHzcEjfy3I\\\",\\\"amount\\\":100,\\\"currency_code\\\":\\\"USD\\\",\\\"payment_method\\\":{\\\"token_method\\\":\\\"B4N5pfKeKp3kwgrhTuAU9432Vdx\\\",\\\"created_method\\\":\\\"2020-05-19\\\",\\\"updated_method\\\":\\\"2020-05-19\\\",\\\"first_name_method\\\":\\\"Jhon\\\",\\\"last_name_method\\\":\\\"Salchicon\\\",\\\"account_number_method\\\":\\\"*3210\\\",\\\"routing_number_method\\\":\\\"021*\\\"}}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="TransaccionSalida" format="json">
+      <types:shape format="weave" example="examples/jsonTransactionsSalida.json"><![CDATA[%dw 2.0
+
+type TransaccionSalida = {|
+  transaction: {|
+    on_test_gateway: Boolean, 
+    created_at: String, 
+    updated_at: String, 
+    succeeded: Boolean, 
+    state: String, 
+    token: String, 
+    transaction_type: String, 
+    order_id: Null, 
+    ip: Null, 
+    description: Null, 
+    email: Null, 
+    merchant_name_descriptor: Null, 
+    merchant_location_descriptor: Null, 
+    gateway_specific_fields: Null, 
+    gateway_specific_response_fields: {|  |}, 
+    gateway_transaction_id: String, 
+    gateway_latency_ms: Number {"typeId": "int"}, 
+    stored_credential_initiator: Null, 
+    stored_credential_reason_type: Null, 
+    warning: Null, 
+    amount: Number {"typeId": "int"}, 
+    currency_code: String, 
+    message_key: String, 
+    message: String, 
+    gateway_token: String, 
+    gateway_type: String, 
+    response: {|
+      success: Boolean, 
+      message: String, 
+      avs_code: Null, 
+      avs_message: Null, 
+      cvv_code: Null, 
+      cvv_message: Null, 
+      pending: Boolean, 
+      result_unknown: Boolean, 
+      error_code: Null, 
+      error_detail: Null, 
+      cancelled: Boolean, 
+      fraud_review: Null, 
+      created_at: String, 
+      updated_at: String
+    |}, 
+    shipping_address: {|
+      name: Null, 
+      address1: Null, 
+      address2: Null, 
+      city: Null, 
+      state: Null, 
+      zip: Null, 
+      country: Null, 
+      phone_number: Null
+    |}, 
+    api_urls: Array<Any>, 
+    reference_token: String
+  |}
+|} {"example": "{\\\"transaction\\\":{\\\"on_test_gateway\\\":true,\\\"created_at\\\":\\\"2020-05-27T16:06:14Z\\\",\\\"updated_at\\\":\\\"2020-05-27T16:06:14Z\\\",\\\"succeeded\\\":true,\\\"state\\\":\\\"succeeded\\\",\\\"token\\\":\\\"5isXObJMYB6g1JC60kYv106W04h\\\",\\\"transaction_type\\\":\\\"PurchaseViaReference\\\",\\\"order_id\\\":null,\\\"ip\\\":null,\\\"description\\\":null,\\\"email\\\":null,\\\"merchant_name_descriptor\\\":null,\\\"merchant_location_descriptor\\\":null,\\\"gateway_specific_fields\\\":null,\\\"gateway_specific_response_fields\\\":{},\\\"gateway_transaction_id\\\":\\\"67\\\",\\\"gateway_latency_ms\\\":0,\\\"stored_credential_initiator\\\":null,\\\"stored_credential_reason_type\\\":null,\\\"warning\\\":null,\\\"amount\\\":100,\\\"currency_code\\\":\\\"USD\\\",\\\"message_key\\\":\\\"messages.transaction_succeeded\\\",\\\"message\\\":\\\"Succeeded!\\\",\\\"gateway_token\\\":\\\"692bGGx77NHdwJv1llg2BbPSpgh\\\",\\\"gateway_type\\\":\\\"test\\\",\\\"response\\\":{\\\"success\\\":true,\\\"message\\\":\\\"Successful purchase\\\",\\\"avs_code\\\":null,\\\"avs_message\\\":null,\\\"cvv_code\\\":null,\\\"cvv_message\\\":null,\\\"pending\\\":false,\\\"result_unknown\\\":false,\\\"error_code\\\":null,\\\"error_detail\\\":null,\\\"cancelled\\\":false,\\\"fraud_review\\\":null,\\\"created_at\\\":\\\"2020-05-27T16:06:14Z\\\",\\\"updated_at\\\":\\\"2020-05-27T16:06:14Z\\\"},\\\"shipping_address\\\":{\\\"name\\\":null,\\\"address1\\\":null,\\\"address2\\\":null,\\\"city\\\":null,\\\"state\\\":null,\\\"zip\\\":null,\\\"country\\\":null,\\\"phone_number\\\":null},\\\"api_urls\\\":[],\\\"reference_token\\\":\\\"KyC99PaKPQYV1IAnlcyown2OXgR\\\"}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="TransaccionSalidaMessage" format="json">
+      <types:shape format="weave" example="examples/jsonTransactionsSalidaTrans.json"><![CDATA[%dw 2.0
+
+type TransaccionSalidaMessage = {|
+  transaction: {|
+    message: String, 
+    created: String, 
+    updated: String, 
+    token: String, 
+    amount: Number {"typeId": "int"}, 
+    gateway_token: String, 
+    reference_token: String
+  |}
+|} {"example": "{\\\"transaction\\\":{\\\"message\\\":\\\"Succeeded!\\\",\\\"created\\\":\\\"2020-05-19\\\",\\\"updated\\\":\\\"2020-05-19\\\",\\\"token\\\":\\\"Kbi4Oit5lez58GlYv8r7pAD8bMA\\\",\\\"amount\\\":100,\\\"gateway_token\\\":\\\"692bGGx77NHdwJv1llg2BbPSpgh\\\",\\\"reference_token\\\":\\\"NPrJ3KNKMfjkXuRBpeHzcEjfy3I\\\"}}"}
+
+]]></types:shape>
+    </types:type>
   </types:catalog>
   <types:enrichment select="#b86d9626-e9bb-4f2e-9496-cdab4ad619d4">
     <types:processor-declaration>
@@ -118,6 +398,48 @@ type TransaccionMessage = {|
       <types:output-event>
         <types:message>
           <types:payload type="PaymethodMessage"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#572d63f4-2519-43f5-b9e3-299210f664e7">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PaymethodSalida"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="PatmethodSalidaMessage"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#31f8d572-9547-45e5-b6dc-63c78ab39cd0">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="CompraSalida"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="CompraSalidaMessage"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#1ace7f11-6741-435e-94ff-3a7001e212fe">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="TransaccionSalida"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="TransaccionSalidaMessage"/>
         </types:message>
       </types:output-event>
     </types:processor-declaration>

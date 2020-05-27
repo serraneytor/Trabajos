@@ -45,6 +45,30 @@ output application/json
 	"Content-Type" : "application/json"
 }]]]></http:headers>
 		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="572d63f4-2519-43f5-b9e3-299210f664e7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	transaction: {
+		token: payload.transaction.token,
+		created: payload.transaction.created_at,
+		updated: payload.transaction.updated_at,
+		succeeded: payload.transaction.succeeded,
+		state: payload.transaction.state,
+		payment_method: {
+			token: payload.transaction.payment_method.token,
+			created: payload.transaction.payment_method.created_at,
+			updated: payload.transaction.payment_method.updated_at,
+			full_name: payload.transaction.payment_method.full_name,
+			routing_number: payload.transaction.payment_method.routing_number,
+			account_number: payload.transaction.payment_method.account_number
+		}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="e9f11f57-e35b-4402-b350-8299c375aee3" message='** HAS INVOCADO A UN METODO DE PAGO TIPO "POST", DESDE POSTMAN **' />
 	</flow>
 	<flow name="POST_COMPRAS" doc:id="f51a6862-c7e2-47c9-8477-87ac9da80ee3">
@@ -70,6 +94,32 @@ output application/json
 	"Content-Type" : "application/json"
 }]]]></http:headers>
 		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="31f8d572-9547-45e5-b6dc-63c78ab39cd0" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	transaction: {
+		created: payload.transaction.created_at,
+		updated: payload.transaction.updated_at,
+		succeeded: payload.transaction.succeeded,
+		token: payload.transaction.token,
+		amount: payload.transaction.amount,
+		currency_code: payload.transaction.currency_code,
+		payment_method: {
+			token_method: payload.transaction.payment_method.token,
+			created_method: payload.transaction.payment_method.created_at,
+			updated_method: payload.transaction.payment_method.updated_at,
+			first_name_method: payload.transaction.payment_method.first_name,
+			last_name_method: payload.transaction.payment_method.last_name,
+			account_number_method: payload.transaction.payment_method.account_number,
+			routing_number_method: payload.transaction.payment_method.routing_number
+		}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="6d8c7f12-d8de-47fd-ae60-bf759118e9e9" message="&quot;HAZ LLAMADO UNA COMPRA MANUAL EXITOSAMENTE DE TIPO 'POST', DESDE POSTMAN&quot;" />
 	</flow>
 	<flow name="POST_TRANSACCION" doc:id="fb495c87-8b4c-4d61-9346-eafd83e155db" >
@@ -99,6 +149,24 @@ output application/json
 	"token_transaction" : payload.transaction.transaction_token
 }]]]></http:uri-params>
 		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="1ace7f11-6741-435e-94ff-3a7001e212fe" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	transaction: {
+		message: payload.transaction.message,
+		created: payload.transaction.created_at,
+		updated: payload.transaction.updated_at,
+		token: payload.transaction.token,
+		amount: payload.transaction.amount,
+		gateway_token: payload.transaction.gateway_token,
+		reference_token: payload.transaction.reference_token
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="558f8c51-c927-4333-beff-0ab5ea490447" message='"VERIFICADOR DE COMPRA"'/>
 	</flow>
 </mule>
