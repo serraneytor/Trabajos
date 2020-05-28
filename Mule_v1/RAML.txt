@@ -1,68 +1,42 @@
 
-####### PETICION METODO PAGO #######
+####### PETICION METODO PAGO, NUM #1 #######
 
 POST : http://localhost:8082/Payment
 
 ENTRADA JSON
 {
-      "first_name": "Jon",
-      "last_name": "Doe",
-      "bank_routing_number": "021000021",
-      "bank_account_number": "9876543210",
-      "bank_account_type": "checking",
-      "bank_account_holder_type": "personal"
+	     "first_name": "Jhon",
+            "last_name": "Alvarez",
+            "bank_routing_number": "021000021",
+            "bank_account_number": "9876543210",
+            "bank_account_type": "checking",
+            "bank_account_holder_type": "personal"
 }
 
 
 JSON SALIDA
 {
     "transaction": {
-        "token": "PQb2a5fINi688Jg5ccqo03ySqvU",
-        "created_at": "2020-05-11T20:57:38Z",
-        "updated_at": "2020-05-11T20:57:38Z",
+        "token": "2vhWzYLfP3oe6Sv4zbCwEJrrPGf",
+        "created": "2020-05-28T18:45:45Z",
+        "updated": "2020-05-28T18:45:45Z",
         "succeeded": true,
-        "transaction_type": "AddPaymentMethod",
-        "retained": false,
         "state": "succeeded",
-        "message_key": "messages.transaction_succeeded",
-        "message": "Succeeded!",
         "payment_method": {
-            "token": "FuvT4BiUN1kZxlAHxuHb9jI4nvK",
-            "created_at": "2020-05-11T20:57:38Z",
-            "updated_at": "2020-05-11T20:57:38Z",
-            "email": null,
-            "data": null,
-            "storage_state": "cached",
-            "test": true,
-            "metadata": null,
-            "callback_url": null,
-            "full_name": "Jon Doe",
-            "bank_name": null,
-            "account_type": "checking",
-            "account_holder_type": "personal",
-            "routing_number_display_digits": "021",
-            "account_number_display_digits": "3210",
-            "first_name": "Jon",
-            "last_name": "Doe",
-            "address1": null,
-            "address2": null,
-            "city": null,
-            "state": null,
-            "zip": null,
-            "country": null,
-            "phone_number": null,
-            "company": null,
-            "payment_method_type": "bank_account",
-            "errors": [],
+            "token": "Pi7BDpDiShIK3DJeo49euKPN5im",
+            "created": "2020-05-28T18:45:45Z",
+            "updated": "2020-05-28T18:45:45Z",
+            "full_name": "Jhon Alvarez",
             "routing_number": "021*",
             "account_number": "*3210"
         }
     }
+}
 
 "ESTO NOS GENERA TOKEN DE'METODO DE PAGO' EL CUAL COPIAREMOS, QUE ESTA DENTRO DEL PAY_METHOD"
 
 
-### COMPRA CON METODO PAGO ### 
+### COMPRA CON METODO PAGO, NUM #2  ### 
 POST: http://localhost:8082/compra
 ENTRADA JSON
 {
@@ -74,101 +48,20 @@ ENTRADA JSON
 SALIDA JSON
 {
     "transaction": {
-        "on_test_gateway": true,
-        "created_at": "2020-05-11T20:54:49Z",
-        "updated_at": "2020-05-11T20:54:49Z",
+        "created": "2020-05-28T18:47:05Z",
+        "updated": "2020-05-28T18:47:05Z",
         "succeeded": true,
-        "state": "succeeded",
-        "token": "3H6A8igl6wuMQcGnCJJ2ptc949z",
-        "transaction_type": "Purchase",
-        "order_id": null,
-        "ip": null,
-        "description": null,
-        "email": null,
-        "merchant_name_descriptor": null,
-        "merchant_location_descriptor": null,
-        "gateway_specific_fields": null,
-        "gateway_specific_response_fields": {},
-        "gateway_transaction_id": "57",
-        "gateway_latency_ms": 31,
-        "stored_credential_initiator": null,
-        "stored_credential_reason_type": null,
-        "warning": null,
+        "token": "PReklDRySe7Bu7luPlbsiaPXDdx",
         "amount": 100,
         "currency_code": "USD",
-        "retain_on_success": false,
-        "payment_method_added": false,
-        "dynamically_routed": false,
-        "routing": null,
-        "message_key": "messages.transaction_succeeded",
-        "message": "Succeeded!",
-        "gateway_token": "692bGGx77NHdwJv1llg2BbPSpgh",
-        "gateway_type": "test",
-        "response": {
-            "success": true,
-            "message": "Successful purchase",
-            "avs_code": null,
-            "avs_message": null,
-            "cvv_code": null,
-            "cvv_message": null,
-            "pending": false,
-            "result_unknown": false,
-            "error_code": null,
-            "error_detail": null,
-            "cancelled": false,
-            "fraud_review": null,
-            "created_at": "2020-05-11T20:54:49Z",
-            "updated_at": "2020-05-11T20:54:49Z"
-        },
-        "shipping_address": {
-            "name": null,
-            "address1": null,
-            "address2": null,
-            "city": null,
-            "state": null,
-            "zip": null,
-            "country": null,
-            "phone_number": null
-        },
-        "api_urls": [
-            {
-                "referencing_transaction": []
-            },
-            {
-                "failover_transaction": []
-            }
-        ],
-        "attempt_3dsecure": false,
         "payment_method": {
-            "token": "Cp5h5dAq4TDYjGIwU8OqkBlDTz1",
-            "created_at": "2020-05-11T20:54:39Z",
-            "updated_at": "2020-05-11T20:54:39Z",
-            "email": null,
-            "data": null,
-            "storage_state": "cached",
-            "test": true,
-            "metadata": null,
-            "callback_url": null,
-            "full_name": "Jon Doe",
-            "bank_name": null,
-            "account_type": "checking",
-            "account_holder_type": "personal",
-            "routing_number_display_digits": "021",
-            "account_number_display_digits": "3210",
-            "first_name": "Jon",
-            "last_name": "Doe",
-            "address1": null,
-            "address2": null,
-            "city": null,
-            "state": null,
-            "zip": null,
-            "country": null,
-            "phone_number": null,
-            "company": null,
-            "payment_method_type": "bank_account",
-            "errors": [],
-            "routing_number": "021*",
-            "account_number": "*3210"
+            "token_method": "YRlRhAAa1HpuzK5XQarRUVWMieZ",
+            "created_method": "2020-05-28T18:46:55Z",
+            "updated_method": "2020-05-28T18:46:55Z",
+            "first_name_method": "Jhon",
+            "last_name_method": "Alvarez",
+            "account_number_method": "*3210",
+            "routing_number_method": "021*"
         }
     }
 }
@@ -183,8 +76,9 @@ NOS MARCARA ERROR YA QUE SOLO SE PUEDE USAR UNA VEZ EL METODO"
 
 
 
-### TOKEN DE PAGO QUE SE USE VARIAS VECES 'TRANSACCION' ###
+### TOKEN DE PAGO QUE SE USE VARIAS VECES 'TRANSACCION', NUM #3  ###
 POST : http://localhost:8082/transaccion
+
 INPUT
 {
     "transaction_token": "3H6A8igl6wuMQcGnCJJ2ptc949z",
@@ -194,60 +88,13 @@ INPUT
 SALIDA
 {
     "transaction": {
-        "on_test_gateway": true,
-        "created_at": "2020-05-11T20:55:00Z",
-        "updated_at": "2020-05-11T20:55:00Z",
-        "succeeded": true,
-        "state": "succeeded",
-        "token": "UVqGFlRu6YSSdl7wBb5GqzHb02a",
-        "transaction_type": "PurchaseViaReference",
-        "order_id": null,
-        "ip": null,
-        "description": null,
-        "email": null,
-        "merchant_name_descriptor": null,
-        "merchant_location_descriptor": null,
-        "gateway_specific_fields": null,
-        "gateway_specific_response_fields": {},
-        "gateway_transaction_id": "49",
-        "gateway_latency_ms": 0,
-        "stored_credential_initiator": null,
-        "stored_credential_reason_type": null,
-        "warning": null,
-        "amount": 128999,
-        "currency_code": "USD",
-        "message_key": "messages.transaction_succeeded",
         "message": "Succeeded!",
+        "created": "2020-05-28T18:40:07Z",
+        "updated": "2020-05-28T18:40:07Z",
+        "token": "GsrMd55ZwePGKZeZRh7QlqL4SaB",
+        "amount": 128999,
         "gateway_token": "692bGGx77NHdwJv1llg2BbPSpgh",
-        "gateway_type": "test",
-        "response": {
-            "success": true,
-            "message": "Successful purchase",
-            "avs_code": null,
-            "avs_message": null,
-            "cvv_code": null,
-            "cvv_message": null,
-            "pending": false,
-            "result_unknown": false,
-            "error_code": null,
-            "error_detail": null,
-            "cancelled": false,
-            "fraud_review": null,
-            "created_at": "2020-05-11T20:55:00Z",
-            "updated_at": "2020-05-11T20:55:00Z"
-        },
-        "shipping_address": {
-            "name": null,
-            "address1": null,
-            "address2": null,
-            "city": null,
-            "state": null,
-            "zip": null,
-            "country": null,
-            "phone_number": null
-        },
-        "api_urls": [],
-        "reference_token": "3H6A8igl6wuMQcGnCJJ2ptc949z"
+        "reference_token": "aFafG5ZYy5ShnZOpv37871Kej4A"
     }
 }
 
@@ -261,4 +108,23 @@ DENTRO DE REQUEST 'TRANSACCION' EN LA PARTE DEL PATH SE LE AGREGO '{token_transa
 'URI PARAMTS' "token_transaction" HACIENO REFERENCIA AL PATH Y SE LE AGREGO payload.transaction.transaction_token,
 QUE ES EL VALOR DEL TOKEN DINAMICO, PARA QUE PUEDA OBTENER EL'TOKEN DE TRANSACCION QUE LE MANDA POSTMAN, SI EL TOKEN 
 INGRESADO NO ES EXITOSO DARA ERROR.
+
+
+### ESTA ES UNA PETICION GLOBAL EN LA CUAL PUEDES ACCEDER A LOS 3 METODOS, NUM #4  ###
+
+URL: POST : http://localhost:8082/all
+
+{
+	    "TipoPeticion": "MetodoPago", -> "Aqui colocamos el nombre de la peticion ala cual queremos acceder,
+                                              como (MetodoPago, Compra, Transaction),
+                                              Ademas de anexar el cuerpo del JSON de la peticion solictada "     
+
+                "first_name": "Jhon",
+                "last_name": "Alvarez",
+                "bank_routing_number": "021000021",
+                "bank_account_number": "9876543210",
+                "bank_account_type": "checking",
+                "bank_account_holder_type": "personal"
+}
+
 
